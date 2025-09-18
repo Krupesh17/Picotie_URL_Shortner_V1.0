@@ -1,0 +1,8 @@
+<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path
+        d="M11.75 15.25V3.25C11.75 2.3 10.6 1.9 10.05 2.65L2.04995 13.15C1.39995 14 1.99995 15.25 3.04995 15.25H11.75Z"
+        stroke="#41CF8D" stroke-width="2" stroke-miterlimit="10" />
+    <path
+        d="M11.75 9.25V21.25C11.75 22.2 12.95 22.6 13.55 21.85L21.95 11.35C22.65 10.5 22 9.25 20.9 9.25H11.75Z"
+        stroke="#41CF8D" stroke-width="2" stroke-miterlimit="10" />
+</svg>
