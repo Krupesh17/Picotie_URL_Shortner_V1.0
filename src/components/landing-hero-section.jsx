@@ -1,7 +1,7 @@
 import React from "react";
 import { Badge } from "./ui/badge";
 import { SparklesIcon } from "lucide-react";
-import { UrlShortenerInputForm } from "./forms";
+import { UrlShortenerInputBox } from ".";
 
 const LandingHeroSection = () => {
   return (
@@ -31,7 +31,7 @@ const LandingHeroSection = () => {
 
         <div className="flex flex-col gap-5">
           <div className="w-full">
-            <UrlShortenerInputForm type="landing" />
+            <UrlShortenerInputBox />
           </div>
           <p className="text-base text-copy-light text-center mx-auto">
             Fast, simple, powerful. Register to shorten instantly.

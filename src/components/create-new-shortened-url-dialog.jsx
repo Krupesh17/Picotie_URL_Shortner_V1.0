@@ -34,7 +34,7 @@ const CreateNewShortenedUrlDialog = ({
     return (
       <Dialog open={isDialogOpen} onOpenChange={handleOnDialogDrawerOpen}>
         <DialogContent
-          className="!max-w-[450px] rounded-3xl"
+          className="!max-w-[450px] rounded-3xl overflow-y-auto"
           aria-describedby={undefined}
         >
           <DialogHeader>
@@ -49,7 +49,11 @@ const CreateNewShortenedUrlDialog = ({
               ending to make it your own.
             </DialogDescription>
           </DialogHeader>
-          <CreateShortUrlForm longLink={longLink} />
+
+          <CreateShortUrlForm
+            longLink={longLink}
+            closeDialog={handleOnDialogDrawerOpen}
+          />
         </DialogContent>
       </Dialog>
     );
@@ -70,8 +74,11 @@ const CreateNewShortenedUrlDialog = ({
             to make it your own.
           </DrawerDescription>
         </DrawerHeader>
-        <div className="px-4 mb-4">
-          <CreateShortUrlForm longLink={longLink} />
+        <div className="px-4 mb-4 overflow-y-auto">
+          <CreateShortUrlForm
+            longLink={longLink}
+            closeDialog={handleOnDialogDrawerOpen}
+          />
         </div>
       </DrawerContent>
     </Drawer>

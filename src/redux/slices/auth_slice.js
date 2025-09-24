@@ -1,5 +1,6 @@
 import supabase from "@/utils/supabase";
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { fetchDashboardData } from "./dashboard_slice";
 
 const initialState = {
   user: null,
@@ -16,6 +17,8 @@ export const fetchUserSession = createAsyncThunk(
         await supabase.auth.getSession();
 
       if (sessionError) throw sessionError;
+
+      await dispatch(fetchDashboardData(sessionData?.session?.user?.id));
 
       return sessionData?.session?.user;
     } catch (error) {

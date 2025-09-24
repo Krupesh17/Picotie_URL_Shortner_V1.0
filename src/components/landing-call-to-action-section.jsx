@@ -1,33 +1,48 @@
 import React from "react";
 import { Button } from "./ui/button";
-import { Users2Icon } from "lucide-react";
-import { useDispatch } from "react-redux";
+import { ArrowRightIcon, Users2Icon } from "lucide-react";
+import { useDispatch, useSelector } from "react-redux";
 import { setAuthFormsDialogActive } from "@/redux/slices/ui_slice";
+import { useNavigate } from "react-router-dom";
 
 const LandingCallToActionSection = () => {
+  const { user } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
-  
+  const navigate = useNavigate();
+
   return (
     <section className="container px-2.5 sm:px-5 mx-auto mt-[100px] max-sm:mt-20">
       <div className="flex flex-col gap-5 max-sm:gap-2.5 mb-10 max-sm:mb-5">
         <h1 className="text-6xl max-lg:text-5xl max-md:text-4xl text-center text-copy font-bold">
-          Ready to Get Started?
+          {user ? "Welcome Back to Picotie" : "Ready to Get Started?"}
         </h1>
         <p className="text-center text-2xl max-lg:text-xl max-md:text-lg text-copy-light">
-          Join thousands of users who trust Picotie for their URL shortening
-          needs.
+          {user
+            ? "Your dashboard is ready. Time to track links, explore analytics and take control of your URLs."
+            : "Join thousands of users who trust Picotie for their URL shortening needs."}
         </p>
       </div>
 
       <div className="flex justify-center">
-        <Button
-          type="button"
-          onClick={() => dispatch(setAuthFormsDialogActive(true))}
-          className="sm:h-[60px] h-10 sm:rounded-3xl rounded-xl !px-4 sm:!px-10"
-        >
-          <Users2Icon className="size-6" />
-          Create Free Account
-        </Button>
+        {user ? (
+          <Button
+            type="button"
+            onClick={() => navigate("/dashboard", { replace: true })}
+            className="sm:h-[60px] h-10 sm:rounded-3xl rounded-xl !px-4 sm:!px-10"
+          >
+            Get to Dashboard
+            <ArrowRightIcon className="size-6" />
+          </Button>
+        ) : (
+          <Button
+            type="button"
+            onClick={() => dispatch(setAuthFormsDialogActive(true))}
+            className="sm:h-[60px] h-10 sm:rounded-3xl rounded-xl !px-4 sm:!px-10"
+          >
+            <Users2Icon className="size-6" />
+            Create Free Account
+          </Button>
+        )}
       </div>
     </section>
   );
