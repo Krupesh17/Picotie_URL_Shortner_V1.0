@@ -42,6 +42,22 @@ export async function createNewShortURL({
   }
 }
 
+export async function getLongURL(url_slug) {
+  try {
+    const { data, error: longURLError } = await supabase
+      .from("urls")
+      .select("id, original_url")
+      .or(`short_url.eq.${url_slug},custom_url.eq.${url_slug}`)
+      .single();
+
+    if (longURLError) throw longURLError;
+
+    return data;
+  } catch (error) {
+    throw error;
+  }
+}
+
 export async function deleteURL(url_id) {
   try {
     const { data, error } = await supabase

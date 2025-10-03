@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useMemo } from "react";
 import {
   ChartColumnIcon,
   LinkIcon,
@@ -6,21 +6,39 @@ import {
   TrendingUpIcon,
 } from "lucide-react";
 import { Card, CardContent, CardHeader } from "./ui/card";
+import { useSelector } from "react-redux";
+
+// Need to use useMemo
 
 const DashboardStatsCards = () => {
+  const { shortLinks, clicks } = useSelector((state) => state.dashboard);
+
+  const state = useMemo(() => {
+    const totalLinks = shortLinks?.length ?? 0;
+    const totalClicks = clicks?.length ?? 0;
+    const averageClicks =
+      totalLinks > 0 ? (totalClicks / totalLinks).toFixed(2) : "0.00";
+
+    return {
+      totalLinks,
+      totalClicks,
+      averageClicks,
+    };
+  }, [shortLinks, clicks]);
+
   const dashboardStatsCardInfoList = [
     {
       heading: "Total Links",
       icon: <LinkIcon className="text-white" />,
       bg_gradient_classNames: "bg-linear-to-b from-neon-blue to-azul",
-      state: 2,
+      state: state?.totalLinks,
       sub_text: "Active shortened URLs",
     },
     {
       heading: "Total Clicks",
       icon: <MousePointerClickIcon className="text-white" />,
       bg_gradient_classNames: "bg-linear-to-b from-goldenrod to-strawberry",
-      state: 487,
+      state: state?.totalClicks,
       sub_text: "Across all links",
     },
     {
@@ -28,7 +46,7 @@ const DashboardStatsCards = () => {
       icon: <ChartColumnIcon className="text-white" />,
       bg_gradient_classNames:
         "bg-linear-to-b from-neon-pink to-purple-daffodil",
-      state: 162,
+      state: state?.averageClicks,
       sub_text: "Per link performance",
     },
   ];

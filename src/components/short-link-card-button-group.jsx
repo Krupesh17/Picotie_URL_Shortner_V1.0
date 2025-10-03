@@ -8,17 +8,11 @@ import {
 } from "lucide-react";
 import { debounce } from "lodash";
 import { Button } from "./ui/button";
-import { TooltipWrapper } from ".";
-import { useDeleteFile, useDeleteURL } from "@/tanstack-query/queries";
-import { useDispatch, useSelector } from "react-redux";
-import { updateShortLinksData } from "@/redux/slices/dashboard_slice";
+import { ShortLinkDeleteDialog, TooltipWrapper } from ".";
 
 const ShortLinkCardButtonGroup = ({ shortLinkData }) => {
-  const { shortLinks } = useSelector((state) => state.dashboard);
-
   const [isURLCopied, setURLCopied] = useState(false);
-
-  const dispatch = useDispatch();
+  const [isDeleteDialogOpen, setDeleteDialogOpen] = useState(false);
 
   const debounceURLCopied = useCallback(
     debounce(() => {
@@ -27,8 +21,9 @@ const ShortLinkCardButtonGroup = ({ shortLinkData }) => {
     []
   );
 
-  const handleCopyURL = async () => {
+  const handleCopyURL = async (event) => {
     try {
+      event?.stopPropagation();
       await navigator.clipboard.writeText(
         `${window.location.origin}/${
           shortLinkData?.custom_url
@@ -44,8 +39,9 @@ const ShortLinkCardButtonGroup = ({ shortLinkData }) => {
     }
   };
 
-  const handleOpenInNewTab = () => {
+  const handleOpenInNewTab = (event) => {
     try {
+      event?.stopPropagation();
       if (!shortLinkData) {
         throw new Error("shortLinkData is undefined or null");
       }
@@ -63,36 +59,6 @@ const ShortLinkCardButtonGroup = ({ shortLinkData }) => {
     }
   };
 
-  const { mutateAsync: deleteQrCode, isPending: isDeletingQrCode } =
-    useDeleteFile();
-  const { mutateAsync: deleteShortURL, isPending: isDeletingShortURL } =
-    useDeleteURL();
-
-  const handleDeleteShortURL = async () => {
-    try {
-      const shortUrlId = shortLinkData?.id;
-
-      if (shortLinkData?.qr_code_url) {
-        const path = shortLinkData?.qr_code_url.match(/qr_codes\/(.+)/)[1];
-
-        await deleteQrCode({
-          bucket_name: "qr_codes",
-          path: path,
-        });
-      }
-
-      await deleteShortURL(shortLinkData?.id);
-
-      const updatedShortLinks = await shortLinks?.filter(
-        (item) => item?.id !== shortUrlId
-      );
-
-      dispatch(updateShortLinksData(updatedShortLinks));
-    } catch (error) {
-      console.error("Failed to delete link:", error.message);
-    }
-  };
-
   const actionButtons = [
     {
       label: "Copy",
@@ -102,45 +68,51 @@ const ShortLinkCardButtonGroup = ({ shortLinkData }) => {
         <CopyIcon className="size-5" />
       ),
       className: "",
-      onClick: () => handleCopyURL(),
+      onClick: (event) => handleCopyURL(event),
     },
     {
       label: "Open in New Tab",
       icon: <SquareArrowOutUpRightIcon className="size-5" />,
       className: "",
-      onClick: () => handleOpenInNewTab(),
+      onClick: (event) => handleOpenInNewTab(event),
     },
     {
       label: "Delete",
-      icon:
-        isDeletingQrCode || isDeletingShortURL ? (
-          <LoaderIcon className="size-5 animate-spin" />
-        ) : (
-          <Trash2Icon className="size-5" />
-        ),
+      icon: <Trash2Icon className="size-5" />,
       className: "max-sm:ml-auto",
-      onClick: () => handleDeleteShortURL(),
+      onClick: (event) => {
+        event?.stopPropagation();
+        setDeleteDialogOpen(true);
+      },
     },
   ];
 
   return (
-    <ul className="flex items-center gap-2.5">
-      {actionButtons?.map((item, index) => (
-        <li key={index} className={`${item?.className}`}>
-          <TooltipWrapper label={item?.label}>
-            <Button
-              type="button"
-              size="icon"
-              variant="outline"
-              className={`size-10 shrink-0 shadow-none rounded-2xl`}
-              onClick={item?.onClick}
-            >
-              {item?.icon}
-            </Button>
-          </TooltipWrapper>
-        </li>
-      ))}
-    </ul>
+    <>
+      <ShortLinkDeleteDialog
+        isDialogOpen={isDeleteDialogOpen}
+        setDialogOpen={setDeleteDialogOpen}
+        shortLinkData={shortLinkData}
+      />
+
+      <ul className="flex items-center gap-2.5">
+        {actionButtons?.map((item, index) => (
+          <li key={index} className={`${item?.className}`}>
+            <TooltipWrapper label={item?.label}>
+              <Button
+                type="button"
+                size="icon"
+                variant="outline"
+                className={`size-10 shrink-0 shadow-none rounded-2xl`}
+                onClick={item?.onClick}
+              >
+                {item?.icon}
+              </Button>
+            </TooltipWrapper>
+          </li>
+        ))}
+      </ul>
+    </>
   );
 };
 

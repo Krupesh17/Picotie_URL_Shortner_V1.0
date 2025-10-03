@@ -1,6 +1,6 @@
 import { createBrowserRouter } from "react-router-dom";
 import { RouterProvider } from "react-router";
-import { Landing } from "./pages";
+import { Landing, Link, RedirectLink } from "./pages";
 import { PrivateRoute, PublicRoute } from "./components";
 import Dashboard from "./pages/dashboard";
 import { useDispatch, useSelector } from "react-redux";
@@ -22,6 +22,7 @@ const router = createBrowserRouter([
   // },
 
   { path: "/", element: <Landing /> },
+  { path: "/:url_slug", element: <RedirectLink /> },
   {
     path: "/dashboard",
     element: <PrivateRoute />,
@@ -32,6 +33,10 @@ const router = createBrowserRouter([
           {
             index: true,
             element: <Dashboard />,
+          },
+          {
+            path: "link/:id",
+            element: <Link />,
           },
         ],
       },

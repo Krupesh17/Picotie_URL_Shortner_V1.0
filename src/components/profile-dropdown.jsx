@@ -34,7 +34,7 @@ const ProfileDropdown = () => {
       },
     },
     {
-      label: "Links",
+      label: "My Links",
       icon: <LinkIcon className="text-copy" />,
       onClick: () => navigate("/dashboard", { replace: true }),
     },

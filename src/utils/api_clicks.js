@@ -1,7 +1,7 @@
 import supabase from "./supabase";
 import { getUserDeviceType } from "@/helpers/userDeviceTypeDetector";
 
-export async function createClick({ url_id, user_id }) {
+export async function createClick(url_id) {
   try {
     const device = getUserDeviceType();
 
@@ -12,7 +12,6 @@ export async function createClick({ url_id, user_id }) {
       .insert([
         {
           url_id: url_id,
-          user_id: user_id,
           country: country?.toLowerCase(),
           region: region?.toLowerCase(),
           city: city?.toLowerCase(),

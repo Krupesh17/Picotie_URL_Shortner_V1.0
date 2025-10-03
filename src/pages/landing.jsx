@@ -12,13 +12,6 @@ import {
 const Landing = () => {
   const [isRegisterFormActive, setRegisterFormActive] = useState(false);
 
-  /**
-   * First of all we have to create a redux store slice called 'uiSlice' in this slice we will have
-   * property called 'isAuthFormsDialogActive' & 'error'.
-   * In this slice we will also have reducer function called 'setAuthFormsDialogActive'
-   * which will be responsible for changing visibility of dialog.
-   */
-
   return (
     <>
       <LoginRegisterDialog
@@ -46,3 +39,4 @@ const Landing = () => {
 };
 
 export default Landing;
+  

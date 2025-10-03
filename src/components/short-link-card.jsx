@@ -4,20 +4,24 @@ import {
   DownloadIcon,
   LinkIcon,
   MousePointerClickIcon,
+  QrCodeIcon,
 } from "lucide-react";
 import { Button } from "./ui/button";
 import { useSelector } from "react-redux";
 import { ShortLinkCardButtonGroup, TooltipWrapper } from ".";
+import { Link, useNavigate } from "react-router-dom";
 
 const ShortLinkCard = ({ shortLinkData }) => {
   const { clicks } = useSelector((state) => state.dashboard);
+  const navigate = useNavigate();
 
   const clicksData = clicks.filter((click) => {
     return click?.url_id === shortLinkData?.id;
   });
 
-  const downloadQRCode = async () => {
+  const downloadQRCode = async (event) => {
     try {
+      event?.stopPropagation();
       // Fetch the QR code image
       const response = await fetch(shortLinkData?.qr_code_url);
       const blob = await response.blob();
@@ -45,22 +49,49 @@ const ShortLinkCard = ({ shortLinkData }) => {
   };
 
   return (
-    <li className="w-full sm:h-[200px] p-5 bg-card border border-border rounded-3xl flex items-start gap-5 max-sm:flex-col overflow-hidden shadow">
+    <div
+      className="w-full sm:h-[200px] p-5 bg-card border border-border rounded-3xl flex items-start gap-5 max-sm:flex-col overflow-hidden shadow"
+      onClick={() => navigate(`link/${shortLinkData?.id}`)}
+    >
       <div className="relative sm:flex-1 sm:min-w-0 sm:h-full w-full h-[220px]">
         <div className="flex flex-col gap-2.5">
-          <h4 className="text-copy sm:text-3xl text-2xl font-semibold truncate">
-            {shortLinkData?.title}
-          </h4>
-          <p className="sm:text-2xl text-xl bg-gradient-to-r from-primary to-purply-blue bg-clip-text text-transparent truncate">
-            {`${window?.location?.origin}/${
-              shortLinkData?.custom_url
-                ? shortLinkData?.custom_url
-                : shortLinkData?.short_url
-            }`}
+          <h1 className="flex text-copy sm:text-3xl text-2xl font-semibold">
+            <Link
+              to={`link/${shortLinkData?.id}`}
+              className="outline-none hover:underline focus-visible:underline truncate"
+              onClick={(event) => event?.stopPropagation()}
+            >
+              {shortLinkData?.title}
+            </Link>
+          </h1>
+          <p className="flex sm:text-2xl text-xl bg-gradient-to-r from-primary to-purply-blue bg-clip-text text-transparent">
+            <Link
+              to={`${window?.location?.origin}/${
+                shortLinkData?.custom_url
+                  ? shortLinkData?.custom_url
+                  : shortLinkData?.short_url
+              }`}
+              target="_blank"
+              className="outline-none hover:decoration-2 focus-visible:decoration-2 decoration-transparent hover:decoration-primary focus-visible:decoration-primary underline truncate"
+              onClick={(event) => event?.stopPropagation()}
+            >
+              {`${window?.location?.origin}/${
+                shortLinkData?.custom_url
+                  ? shortLinkData?.custom_url
+                  : shortLinkData?.short_url
+              }`}
+            </Link>
           </p>
           <div className="flex items-center gap-1.5">
-            <LinkIcon className="size-5 shrink-0" />
-            <p className="text-sm truncate">{shortLinkData?.original_url}</p>
+            <LinkIcon className="size-4 shrink-0" />
+            <Link
+              to={shortLinkData?.original_url}
+              target="_blank"
+              className="text-sm truncate outline-none hover:underline focus-visible:underline"
+              onClick={(event) => event?.stopPropagation()}
+            >
+              {shortLinkData?.original_url}
+            </Link>
           </div>
         </div>
 
@@ -90,24 +121,38 @@ const ShortLinkCard = ({ shortLinkData }) => {
           </div>
         </div>
       </div>
+      <div className="flex flex-col gap-5 max-sm:w-full">
+        <div className="flex items-center justify-between gap-2.5 sm:hidden">
+          <p className="text-copy font-medium flex items-center gap-1.5">
+            <QrCodeIcon className="size-5" /> QR Code
+          </p>
+          <Button
+            type="button"
+            className="h-10 rounded-2xl"
+            onClick={(event) => downloadQRCode(event)}
+          >
+            <DownloadIcon className="size-5" /> <span>Download</span>
+          </Button>
+        </div>
 
-      <div className="relative aspect-square bg-popover size-[160px] max-sm:size-[200px] mx-auto shrink-0 overflow-hidden rounded-xl group">
-        <TooltipWrapper label="Download QR Code">
-        <Button
-          size="icon"
-          className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 size-10 rounded-2xl shrink-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-          onClick={downloadQRCode}
-        >
-          <DownloadIcon className="size-5" />
-        </Button>
-        </TooltipWrapper>
-        <img
-          src={shortLinkData?.qr_code_url}
-          alt="QR Code"
-          className="w-full h-full"
-        />
+        <div className="relative aspect-square bg-popover size-[160px] max-sm:size-[200px] mx-auto shrink-0 overflow-hidden rounded-2xl group">
+          <TooltipWrapper label="Download QR Code">
+            <Button
+              size="icon"
+              className="max-sm:hidden absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 size-10 rounded-2xl shrink-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+              onClick={(event) => downloadQRCode(event)}
+            >
+              <DownloadIcon className="size-5" />
+            </Button>
+          </TooltipWrapper>
+          <img
+            src={shortLinkData?.qr_code_url}
+            alt="QR Code"
+            className="w-full h-full"
+          />
+        </div>
       </div>
-    </li>
+    </div>
   );
 };
 

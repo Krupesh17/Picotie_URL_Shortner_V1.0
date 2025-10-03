@@ -60,7 +60,9 @@ const DashboardLinksSection = () => {
         <ul className="flex flex-col gap-5">
           {shortLinks &&
             shortLinks?.map((shortLink) => (
-              <ShortLinkCard key={shortLink?.id} shortLinkData={shortLink} />
+              <li key={shortLink?.id}>
+                <ShortLinkCard shortLinkData={shortLink} />
+              </li>
             ))}
         </ul>
       </section>

@@ -1,7 +1,7 @@
 import { createAccount, logIn, logOut } from "@/utils/api_auth";
 import { deleteFile, uploadFile } from "@/utils/api_bucket";
 import { createClick, getClicksByURLId } from "@/utils/api_clicks";
-import { createNewShortURL, deleteURL } from "@/utils/api_urls";
+import { createNewShortURL, deleteURL, getLongURL } from "@/utils/api_urls";
 import { useMutation } from "@tanstack/react-query";
 
 export const useCreateAccount = () => {
@@ -40,6 +40,15 @@ export const useCreateNewShortURL = () => {
   });
 };
 
+export const useGetLongURL = () => {
+  return useMutation({
+    mutationFn: (url_slug) => getLongURL(url_slug),
+    onError: (error) => {
+      throw error;
+    },
+  });
+};
+
 export const useDeleteURL = () => {
   return useMutation({
     mutationFn: (url_id) => deleteURL(url_id),
@@ -51,7 +60,7 @@ export const useDeleteURL = () => {
 
 export const useCreateClick = () => {
   return useMutation({
-    mutationFn: (data) => createClick(data),
+    mutationFn: (url_id) => createClick(url_id),
     onError: (error) => {
       throw error;
     },
