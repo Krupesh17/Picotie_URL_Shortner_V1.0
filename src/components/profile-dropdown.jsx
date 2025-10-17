@@ -21,7 +21,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { useLogOut } from "@/tanstack-query/queries";
 import { toast } from "sonner";
 
-const ProfileDropdown = () => {
+const ProfileDropdown = ({ setAccountSettingsDialogOpen }) => {
   const { user } = useSelector((state) => state.auth);
   const navigate = useNavigate();
   const { pathname } = useLocation();
@@ -29,9 +29,7 @@ const ProfileDropdown = () => {
     {
       label: "Account",
       icon: <User2Icon className="text-copy" />,
-      onClick: () => {
-        console.log("Account");
-      },
+      onClick: () => setAccountSettingsDialogOpen(true),
     },
     {
       label: "My Links",

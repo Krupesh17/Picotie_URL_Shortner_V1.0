@@ -3,7 +3,7 @@ import { useSelector } from "react-redux";
 import { ProfileDropdown } from ".";
 import { Link } from "react-router-dom";
 
-const DashboardHeader = () => {
+const DashboardHeader = ({ setAccountSettingsDialogOpen }) => {
   const { user } = useSelector((state) => state.auth);
 
   return (
@@ -20,7 +20,11 @@ const DashboardHeader = () => {
           </h2>
         </Link>
 
-        {user && <ProfileDropdown />}
+        {user && (
+          <ProfileDropdown
+            setAccountSettingsDialogOpen={setAccountSettingsDialogOpen}
+          />
+        )}
       </nav>
     </header>
   );

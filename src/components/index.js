@@ -24,3 +24,4 @@ export { default as LinkAnalyticsSection } from "./link-analytics-section";
 export { default as LinkDeviceClickAnalyticsChart } from "./link-device-click-analytics-chart";
 export { default as LinkDailyClickAnalyticsChart } from "./link-daily-click-analytics-chart";
 export { default as LinkLocationClickAnalyticsChart } from "./link-location-click-analytics-chart";
+export { default as AccountSettingsDialog } from "./account-settings-dialog";

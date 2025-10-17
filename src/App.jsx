@@ -1,6 +1,6 @@
 import { createBrowserRouter } from "react-router-dom";
 import { RouterProvider } from "react-router";
-import { Landing, Link, RedirectLink } from "./pages";
+import { ChangePassword, Landing, Link, RedirectLink, VerifyEmailChange } from "./pages";
 import { PrivateRoute, PublicRoute } from "./components";
 import Dashboard from "./pages/dashboard";
 import { useDispatch, useSelector } from "react-redux";
@@ -23,6 +23,14 @@ const router = createBrowserRouter([
 
   { path: "/", element: <Landing /> },
   { path: "/:url_slug", element: <RedirectLink /> },
+  {
+    path: "/verify-email-change",
+    element: <VerifyEmailChange />,
+  },
+  {
+    path: "/change-password",
+    element: <ChangePassword />,
+  },
   {
     path: "/dashboard",
     element: <PrivateRoute />,
@@ -80,6 +88,10 @@ function App() {
             if (session && !user) {
               dispatch(fetchUserSession());
             }
+          }
+
+          if (event === "USER_UPDATED") {
+            dispatch(fetchUserSession());
           }
 
           if (event === "SIGNED_OUT" || !session) {

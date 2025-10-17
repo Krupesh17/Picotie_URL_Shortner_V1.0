@@ -20,6 +20,18 @@ export async function createAccount({ name, email, password }) {
   }
 }
 
+export async function updateAccount(userData) {
+  try {
+    const { data, error } = await supabase.auth.updateUser(userData);
+
+    if (error) throw error;
+
+    return data;
+  } catch (error) {
+    throw error;
+  }
+}
+
 export async function logIn({ email, password }) {
   try {
     if (!email || !password) {
@@ -44,6 +56,56 @@ export async function logOut() {
   try {
     const { error: signOutError } = await supabase.auth.signOut();
     if (signOutError) throw signOutError;
+  } catch (error) {
+    throw error;
+  }
+}
+
+export async function resetPassword({ email, changePasswordToken }) {
+  try {
+    const { data, error } = await supabase.auth.resetPasswordForEmail(email, {
+      redirectTo: `${window.location.origin}/change-password?reset_token=${changePasswordToken}`,
+    });
+
+    if (error) throw error;
+
+    return data;
+  } catch (error) {
+    throw error;
+  }
+}
+
+export async function changePassword(new_password) {
+  try {
+    const { data, error } = await supabase.auth.updateUser({
+      password: new_password,
+    });
+
+    if (error) throw error;
+
+    return data;
+  } catch (error) {
+    throw error;
+  }
+}
+
+export async function changeEmail({ newEmail, changeEmailToken }) {
+  try {
+    const { data, error } = await supabase.auth?.updateUser(
+      {
+        email: newEmail,
+        data: {
+          email: newEmail,
+        },
+      },
+      {
+        emailRedirectTo: `${window.location.origin}/verify-email-change?change_email_token=${changeEmailToken}`,
+      }
+    );
+
+    if (error) throw error;
+
+    return data?.user;
   } catch (error) {
     throw error;
   }

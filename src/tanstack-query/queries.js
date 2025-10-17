@@ -1,4 +1,12 @@
-import { createAccount, logIn, logOut } from "@/utils/api_auth";
+import {
+  changeEmail,
+  changePassword,
+  createAccount,
+  logIn,
+  logOut,
+  resetPassword,
+  updateAccount,
+} from "@/utils/api_auth";
 import { deleteFile, uploadFile } from "@/utils/api_bucket";
 import { createClick, getClicksByURLId } from "@/utils/api_clicks";
 import { createNewShortURL, deleteURL, getLongURL } from "@/utils/api_urls";
@@ -7,6 +15,15 @@ import { useMutation } from "@tanstack/react-query";
 export const useCreateAccount = () => {
   return useMutation({
     mutationFn: (data) => createAccount(data),
+    onError: (error) => {
+      throw error;
+    },
+  });
+};
+
+export const useUpdateAccount = () => {
+  return useMutation({
+    mutationFn: (data) => updateAccount(data),
     onError: (error) => {
       throw error;
     },
@@ -25,6 +42,33 @@ export const useLogIn = () => {
 export const useLogOut = () => {
   return useMutation({
     mutationFn: () => logOut(),
+    onError: (error) => {
+      throw error;
+    },
+  });
+};
+
+export const useResetPassword = () => {
+   return useMutation({
+    mutationFn: (data) => resetPassword(data),
+    onError: (error) => {
+      throw error;
+    },
+  });
+}
+
+export const useChangePassword = () => {
+  return useMutation({
+    mutationFn: (new_password) => changePassword(new_password),
+    onError: (error) => {
+      throw error;
+    },
+  });
+};
+
+export const useChangeEmail = () => {
+  return useMutation({
+    mutationFn: (data) => changeEmail(data),
     onError: (error) => {
       throw error;
     },
