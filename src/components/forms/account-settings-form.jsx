@@ -13,13 +13,8 @@ import {
 } from "../ui/form";
 import { Input } from "../ui/input";
 import { Button } from "../ui/button";
-import { ProfileAvatar, TooltipWrapper } from "..";
-import {
-  AlertCircleIcon,
-  CheckCircle2Icon,
-  Loader,
-  PencilIcon,
-} from "lucide-react";
+import { ProfilePictureEditor } from "..";
+import { AlertCircleIcon, CheckCircle2Icon, Loader } from "lucide-react";
 import { v4 as uuidV4 } from "uuid";
 import {
   useChangeEmail,
@@ -105,12 +100,6 @@ const AccountSettingsForm = ({ handleOnDialogDrawerOpen }) => {
     }
   };
 
-  // Write code for uploading profile image.
-  const handleUploadProfileImage = () => {
-    
-
-  };
-
   const { mutateAsync: resetPassword, isPending: isResetPasswordPending } =
     useResetPassword();
 
@@ -154,24 +143,9 @@ const AccountSettingsForm = ({ handleOnDialogDrawerOpen }) => {
 
   return (
     <>
-      <div className="flex items-center my-4">
-        <div className="relative mx-auto">
-          <ProfileAvatar
-            name={user?.user_metadata?.name}
-            profile_pic_url={user?.user_metadata?.profile_pic}
-            className="size-28 shrink-0 rounded-[40px] text-copy bg-blue-300"
-          />
-          <TooltipWrapper label="Update Profile Picture">
-            <Button
-              type="button"
-              size="icon"
-              className="size-10 rounded-full absolute right-0 bottom-0"
-            >
-              <PencilIcon className="size-5" />
-            </Button>
-          </TooltipWrapper>
-        </div>
-      </div>
+      <ProfilePictureEditor
+        handleOnDialogDrawerOpen={handleOnDialogDrawerOpen}
+      />
 
       <Form {...form}>
         <form

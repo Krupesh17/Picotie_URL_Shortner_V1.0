@@ -25,3 +25,5 @@ export { default as LinkDeviceClickAnalyticsChart } from "./link-device-click-an
 export { default as LinkDailyClickAnalyticsChart } from "./link-daily-click-analytics-chart";
 export { default as LinkLocationClickAnalyticsChart } from "./link-location-click-analytics-chart";
 export { default as AccountSettingsDialog } from "./account-settings-dialog";
+export { default as ProfilePictureEditor } from "./profile-picture-editor";
+export { default as ProfilePicturePopoverMenu } from "./profile-picture-popover-menu";

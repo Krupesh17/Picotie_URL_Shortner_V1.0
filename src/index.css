@@ -263,4 +263,28 @@
       opacity: 1.5;
     }
   }
+
+  @keyframes pulse-shadow {
+    0%,
+    100% {
+      box-shadow: 0 0 40px rgba(59, 130, 246, 0.8),
+        0 0 60px rgba(59, 130, 246, 0.6), 0 0 80px rgba(59, 130, 246, 0.4);
+    }
+    25% {
+      box-shadow: 0 0 40px rgba(139, 92, 246, 0.8),
+        0 0 60px rgba(139, 92, 246, 0.6), 0 0 80px rgba(139, 92, 246, 0.4);
+    }
+    50% {
+      box-shadow: 0 0 40px rgba(236, 72, 153, 0.8),
+        0 0 60px rgba(236, 72, 153, 0.6), 0 0 80px rgba(236, 72, 153, 0.4);
+    }
+    75% {
+      box-shadow: 0 0 40px rgba(249, 115, 22, 0.8),
+        0 0 60px rgba(249, 115, 22, 0.6), 0 0 80px rgba(249, 115, 22, 0.4);
+    }
+  }
+
+  .animate-pulse-shadow {
+    animation: pulse-shadow 3s ease-in-out infinite;
+  }
 }

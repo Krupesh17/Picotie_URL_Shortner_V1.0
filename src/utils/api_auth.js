@@ -8,6 +8,7 @@ export async function createAccount({ name, email, password }) {
       options: {
         data: {
           name,
+          profile_pic: "",
         },
       },
     });
