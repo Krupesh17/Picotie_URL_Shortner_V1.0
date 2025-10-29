@@ -12,9 +12,6 @@ import { v4 as uuidV4 } from "uuid";
 import { supabaseUrl } from "@/utils/supabase";
 import { CircleAlertIcon } from "lucide-react";
 
-// On edit button of profile picture i think we have to add pop up menu which will show some options
-// link 'Delete' and 'Update'.
-
 const ProfilePictureEditor = ({ handleOnDialogDrawerOpen }) => {
   const { user } = useSelector((state) => state.auth);
   const fileInputRef = useRef(null);

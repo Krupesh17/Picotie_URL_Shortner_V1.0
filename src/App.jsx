@@ -1,6 +1,12 @@
 import { createBrowserRouter } from "react-router-dom";
 import { RouterProvider } from "react-router";
-import { ChangePassword, Landing, Link, RedirectLink, VerifyEmailChange } from "./pages";
+import {
+  ChangePassword,
+  Landing,
+  Link,
+  RedirectLink,
+  VerifyEmailChange,
+} from "./pages";
 import { PrivateRoute, PublicRoute } from "./components";
 import Dashboard from "./pages/dashboard";
 import { useDispatch, useSelector } from "react-redux";
@@ -15,13 +21,13 @@ import { LoaderIcon } from "lucide-react";
 import { DashboardLayout } from "./layouts";
 
 const router = createBrowserRouter([
-  // {
-  //   path: "/",
-  //   element: <PublicRoute />,
-  //   children: [{ index: true, element: <Landing /> }],
-  // },
+  {
+    path: "/",
+    element: <PublicRoute />,
+    children: [{ index: true, element: <Landing /> }],
+  },
 
-  { path: "/", element: <Landing /> },
+  // { path: "/", element: <Landing /> },
   { path: "/:url_slug", element: <RedirectLink /> },
   {
     path: "/verify-email-change",

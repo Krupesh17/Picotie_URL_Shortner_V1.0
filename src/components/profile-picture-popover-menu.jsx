@@ -4,9 +4,6 @@ import { Button } from "./ui/button";
 import { LoaderIcon, PencilIcon, Trash2Icon, UploadIcon } from "lucide-react";
 import { useSelector } from "react-redux";
 
-// If there is no profile picture already available then when user click on edit button
-// then directly select from device popup should be opened.
-
 const ProfilePicturePopoverMenu = ({
   fileInputRef,
   removeCurrentPicture,
