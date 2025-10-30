@@ -12,7 +12,7 @@ const InputPassword = forwardRef(({ className = "", ...props }, ref) => {
     >
       <Input
         type={isPasswordVisible ? "text" : "password"}
-        className="h-full border-none shadow-none px-0 focus-visible:ring-0"
+        className="h-full border-none shadow-none px-0 !bg-transparent focus-visible:ring-0"
         ref={ref}
         {...props}
       />

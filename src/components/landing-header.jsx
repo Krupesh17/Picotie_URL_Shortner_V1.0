@@ -18,7 +18,7 @@ const LandingHeader = ({ setRegisterFormActive }) => {
             alt="Picotie Logo"
             className="sm:w-[60px] sm:h-[60px] w-10 h-10 rounded-2xl sm:rounded-3xl"
           />
-          <h2 className="text-xl sm:text-3xl font-medium text-copy-negative">
+          <h2 className="text-xl sm:text-3xl font-medium text-[#f2f2f2]">
             Picotie
           </h2>
         </div>
@@ -30,7 +30,7 @@ const LandingHeader = ({ setRegisterFormActive }) => {
             <Button
               type="button"
               variant="ghost"
-              className="sm:h-[60px] h-10 sm:rounded-3xl rounded-xl px-5 text-copy-negative hover:bg-background/10 hover:text-copy-negative max-sm:hidden"
+              className="sm:h-[60px] h-10 sm:rounded-3xl rounded-xl px-5 text-[#f2f2f2] hover:bg-background/10 hover:text-[#f2f2f2] max-sm:hidden"
               onClick={() => {
                 dispatch(
                   setAuthFormsDialogActive({

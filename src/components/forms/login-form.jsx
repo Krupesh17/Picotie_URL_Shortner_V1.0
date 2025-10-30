@@ -90,7 +90,7 @@ const LogInForm = ({ setRegisterFormActive }) => {
                   type="email"
                   placeholder="Email"
                   autoComplete="email"
-                  className="h-10 text-base shadow-none rounded-xl"
+                  className="h-10 text-base shadow-none rounded-xl !bg-transparent"
                   {...field}
                 />
               </FormControl>

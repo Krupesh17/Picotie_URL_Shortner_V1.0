@@ -8,8 +8,6 @@ import {
 import { Card, CardContent, CardHeader } from "./ui/card";
 import { useSelector } from "react-redux";
 
-// Need to use useMemo
-
 const DashboardStatsCards = () => {
   const { shortLinks, clicks } = useSelector((state) => state.dashboard);
 
@@ -73,7 +71,7 @@ const DashboardStatsCards = () => {
                   </div>
                 </li>
               </ul>
-              <p className="sm:hidden text-2xl font-medium">{item?.state}</p>
+              <p className="sm:hidden text-copy text-2xl font-medium">{item?.state}</p>
             </CardHeader>
 
             <CardContent className="flex flex-col gap-2 max-sm:hidden">

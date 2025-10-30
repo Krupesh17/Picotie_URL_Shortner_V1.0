@@ -8,9 +8,11 @@ import {
   LandingFooter,
   LoginRegisterDialog,
 } from "@/components";
+import { useTheme } from "@/components/theme-provider";
 
 const Landing = () => {
   const [isRegisterFormActive, setRegisterFormActive] = useState(false);
+  const { theme } = useTheme();
 
   return (
     <>
@@ -22,7 +24,11 @@ const Landing = () => {
       <div
         className="relative min-h-dvh w-full bg-background"
         style={{
-          background: "url('/assets/images/bg-pattern-white.svg')",
+          background: `${
+            theme === "dark"
+              ? "url('/assets/images/bg-pattern-black.svg')"
+              : "url('/assets/images/bg-pattern-white.svg')"
+          }`,
           backgroundRepeat: "repeat",
           backgroundSize: "87px 50px",
         }}
@@ -39,4 +45,3 @@ const Landing = () => {
 };
 
 export default Landing;
-  

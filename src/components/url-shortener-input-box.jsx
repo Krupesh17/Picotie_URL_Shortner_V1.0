@@ -112,7 +112,7 @@ const UrlShortenerInputBox = ({ className }) => {
                   <Input
                     type="text"
                     placeholder="Enter your URL here"
-                    className="w-full border-0 shadow-none md:text-base focus-visible:ring-0"
+                    className="w-full border-0 shadow-none md:text-base focus-visible:ring-0 !bg-transparent"
                     onFocus={handleInputFocus}
                     autoComplete="off"
                     {...field}

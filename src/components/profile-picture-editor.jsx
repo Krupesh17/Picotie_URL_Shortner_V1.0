@@ -30,72 +30,89 @@ const ProfilePictureEditor = ({ handleOnDialogDrawerOpen }) => {
 
   const { mutateAsync: uploadProfilePicture } = useUploadFile();
 
-  const updateProfilePicture = useCallback(async (imageFile) => {
-    resetState();
-    setIsLoading(true);
+  const updateProfilePicture = useCallback(
+    async (imageFile) => {
+      resetState();
+      setIsLoading(true);
 
-    const reader = new FileReader();
-    reader.readAsDataURL(imageFile);
-    reader.onload = async () => {
-      const base64Image = reader.result;
+      const reader = new FileReader();
+      reader.readAsDataURL(imageFile);
+      reader.onload = async () => {
+        const base64Image = reader.result;
 
-      try {
-        const boundingBox = await cropToPerson(base64Image);
-        if (boundingBox) {
-          const croppedImageBlob = await cropImageToSquare(
-            base64Image,
-            boundingBox
-          );
-
-          if (!croppedImageBlob) {
-            throw new Error(
-              "Cropping the profile picture failed. Please retry."
+        try {
+          const boundingBox = await cropToPerson(base64Image);
+          if (boundingBox) {
+            const croppedImageBlob = await cropImageToSquare(
+              base64Image,
+              boundingBox
             );
-          }
 
-          if (user?.user_metadata?.profile_pic) {
-            const path = user?.user_metadata?.profile_pic.match(
-              /profile_pictures\/(.+)/
-            )[1];
+            if (!croppedImageBlob) {
+              throw new Error(
+                "Cropping the profile picture failed. Please retry."
+              );
+            }
 
-            await deleteProfilePicture({
+            if (user?.user_metadata?.profile_pic) {
+              const path = user?.user_metadata?.profile_pic.match(
+                /profile_pictures\/(.+)/
+              )[1];
+
+              await deleteProfilePicture({
+                bucket_name: "profile_pictures",
+                path: path,
+              });
+
+              await updateAccount({ data: { profile_pic: "" } });
+            }
+
+            const file_name = `${user?.id}/profile-pic-${uuidV4()}`;
+
+            await uploadProfilePicture({
               bucket_name: "profile_pictures",
-              path: path,
+              path: file_name,
+              file: croppedImageBlob,
             });
 
-            await updateAccount({ data: { profile_pic: "" } });
+            const profile_pic_url = `${supabaseUrl}/storage/v1/object/public/profile_pictures/${file_name}`;
+
+            await updateAccount({ data: { profile_pic: profile_pic_url } });
+
+            handleOnDialogDrawerOpen();
           }
+        } catch (error) {
+          if (error) {
+            console.error(error?.message);
+            setError(error?.message);
+          } else {
+            setError("An unexpected error occurred.");
+          }
+        } finally {
+          setIsLoading(false);
 
-          const file_name = `${user?.id}/profile-pic-${uuidV4()}`;
-
-          await uploadProfilePicture({
-            bucket_name: "profile_pictures",
-            path: file_name,
-            file: croppedImageBlob,
-          });
-
-          const profile_pic_url = `${supabaseUrl}/storage/v1/object/public/profile_pictures/${file_name}`;
-
-          await updateAccount({ data: { profile_pic: profile_pic_url } });
-
-          handleOnDialogDrawerOpen();
+          if (fileInputRef.current) {
+            fileInputRef.current.value = "";
+          }
         }
-      } catch (error) {
-        if (error) {
-          console.error(error?.message);
-          setError(error?.message);
-        } else {
-          setError("An unexpected error occurred.");
-        }
-      } finally {
+      };
+      reader.onerror = () => {
+        setError("Failed to read the uploaded file.");
         setIsLoading(false);
-      }
-    };
-    reader.onerror = () => {
-      setError("Failed to read the uploaded file.");
-      setIsLoading(false);
-    };
-  }, []);
+
+        if (fileInputRef.current) {
+          fileInputRef.current.value = "";
+        }
+      };
+    },
+    [
+      user,
+      deleteProfilePicture,
+      updateAccount,
+      uploadProfilePicture,
+      handleOnDialogDrawerOpen,
+    ]
+  );
 
   const deleteCurrentProfilePicture = async () => {
     try {
