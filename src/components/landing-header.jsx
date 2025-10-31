@@ -6,7 +6,7 @@ import { ProfileDropdown } from ".";
 import { setAuthFormsDialogActive } from "@/redux/slices/ui_slice";
 import { useTheme } from "./theme-provider";
 
-const LandingHeader = ({ setRegisterFormActive }) => {
+const LandingHeader = ({ setAuthDialogState }) => {
   const { user } = useSelector((state) => state.auth);
   const { theme, setTheme } = useTheme();
 
@@ -41,6 +41,7 @@ const LandingHeader = ({ setRegisterFormActive }) => {
                     navigateTo: "/dashboard",
                   })
                 );
+                setAuthDialogState("login");
               }}
             >
               Log In
@@ -55,7 +56,7 @@ const LandingHeader = ({ setRegisterFormActive }) => {
                     navigateTo: "/dashboard",
                   })
                 );
-                setRegisterFormActive(true);
+                setAuthDialogState("register");
               }}
             >
               Register Now
@@ -70,6 +71,7 @@ const LandingHeader = ({ setRegisterFormActive }) => {
                     navigateTo: "/dashboard",
                   })
                 );
+                setAuthDialogState("login");
               }}
             >
               <span>Get Started</span> <ArrowRight />

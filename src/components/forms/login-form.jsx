@@ -20,7 +20,7 @@ import { toast } from "sonner";
 import { useDispatch, useSelector } from "react-redux";
 import { setAuthFormsDialogActive } from "@/redux/slices/ui_slice";
 
-const LogInForm = ({ setRegisterFormActive }) => {
+const LogInForm = ({ setAuthDialogState }) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { navigateToAfterAuthFormSubmitted } = useSelector((state) => state.ui);
@@ -122,6 +122,7 @@ const LogInForm = ({ setRegisterFormActive }) => {
             type="button"
             variant="link"
             className="h-auto p-0 text-copy mb-4"
+            onClick={() => setAuthDialogState("reset-password")}
           >
             Forgot Password?
           </Button>
@@ -144,7 +145,7 @@ const LogInForm = ({ setRegisterFormActive }) => {
             type="button"
             variant="link"
             className="h-auto p-0 text-copy"
-            onClick={() => setRegisterFormActive(true)}
+            onClick={() => setAuthDialogState("register")}
           >
             Register
           </Button>

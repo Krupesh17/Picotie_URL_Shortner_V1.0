@@ -11,14 +11,14 @@ import {
 import { useTheme } from "@/components/theme-provider";
 
 const Landing = () => {
-  const [isRegisterFormActive, setRegisterFormActive] = useState(false);
+  const [authDialogState, setAuthDialogState] = useState("login");
   const { theme } = useTheme();
 
   return (
     <>
       <LoginRegisterDialog
-        isRegisterFormActive={isRegisterFormActive}
-        setRegisterFormActive={setRegisterFormActive}
+        authDialogState={authDialogState}
+        setAuthDialogState={setAuthDialogState}
       />
 
       <div
@@ -33,7 +33,7 @@ const Landing = () => {
           backgroundSize: "87px 50px",
         }}
       >
-        <LandingHeader setRegisterFormActive={setRegisterFormActive} />
+        <LandingHeader setAuthDialogState={setAuthDialogState} />
         <LandingHeroSection />
         <LandingFeaturesSection />
         <LandingStatsSection />

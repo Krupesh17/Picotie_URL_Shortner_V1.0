@@ -20,7 +20,7 @@ import { toast } from "sonner";
 import { setAuthFormsDialogActive } from "@/redux/slices/ui_slice";
 import { useDispatch, useSelector } from "react-redux";
 
-const RegisterForm = ({ setRegisterFormActive }) => {
+const RegisterForm = ({ setAuthDialogState }) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { navigateToAfterAuthFormSubmitted } = useSelector((state) => state.ui);
@@ -166,7 +166,7 @@ const RegisterForm = ({ setRegisterFormActive }) => {
             type="button"
             variant="link"
             className="h-auto p-0 text-copy"
-            onClick={() => setRegisterFormActive(false)}
+            onClick={() => setAuthDialogState("login")}
           >
             Login
           </Button>

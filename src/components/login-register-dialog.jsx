@@ -14,15 +14,12 @@ import {
   DrawerHeader,
   DrawerTitle,
 } from "./ui/drawer";
-import { LogInForm, RegisterForm } from "./forms";
-import { UserRoundIcon, UserRoundPlusIcon } from "lucide-react";
+import { LogInForm, RegisterForm, ResetPasswordForm } from "./forms";
+import { RotateCcwKeyIcon, UserRoundIcon, UserRoundPlusIcon } from "lucide-react";
 import { useDispatch, useSelector } from "react-redux";
 import { setAuthFormsDialogActive } from "@/redux/slices/ui_slice";
 
-const LoginRegisterDialog = ({
-  isRegisterFormActive,
-  setRegisterFormActive,
-}) => {
+const LoginRegisterDialog = ({ authDialogState, setAuthDialogState }) => {
   const isDesktop = useMediaQuery("(min-width: 768px)");
   const { isAuthFormsDialogActive } = useSelector((state) => state?.ui);
   const dispatch = useDispatch();
@@ -34,10 +31,9 @@ const LoginRegisterDialog = ({
         navigateTo: "/dashboard",
       })
     );
-    setRegisterFormActive(false);
+    setAuthDialogState("login");
   };
 
-  
   if (isDesktop) {
     return (
       <Dialog
@@ -50,25 +46,33 @@ const LoginRegisterDialog = ({
         >
           <DialogHeader>
             <div className="flex items-center justify-center size-10 mx-auto text-white bg-gradient-to-r from-primary to-purply-blue rounded-2xl">
-              {isRegisterFormActive ? (
+              {authDialogState === "register" && (
                 <UserRoundPlusIcon className="ml-0.5" />
-              ) : (
-                <UserRoundIcon />
               )}
+              {authDialogState === "login" && <UserRoundIcon />}
+              {authDialogState === "reset-password" && <RotateCcwKeyIcon />}
             </div>
             <DialogTitle className="text-center text-2xl text-copy">
-              {isRegisterFormActive ? "Let's Get Started" : "Welcome Back"}
+              {authDialogState === "register" && "Let's Get Started"}
+              {authDialogState === "login" && "Welcome Back"}
+              {authDialogState === "reset-password" && "Reset Your Password"}
             </DialogTitle>
             <DialogDescription className="text-center text-base text-copy-light">
-              {isRegisterFormActive
-                ? "Join us, register and discover Picotie"
-                : "Login to your Picotie account"}
+              {authDialogState === "register" &&
+                "Join us, register and discover Picotie"}
+              {authDialogState === "login" && "Login to your Picotie account"}
+              {authDialogState === "reset-password" &&
+                "Enter your email to receive password reset instructions"}
             </DialogDescription>
           </DialogHeader>
-          {isRegisterFormActive ? (
-            <RegisterForm setRegisterFormActive={setRegisterFormActive} />
-          ) : (
-            <LogInForm setRegisterFormActive={setRegisterFormActive} />
+          {authDialogState === "register" && (
+            <RegisterForm setAuthDialogState={setAuthDialogState} />
+          )}
+          {authDialogState === "login" && (
+            <LogInForm setAuthDialogState={setAuthDialogState} />
+          )}
+          {authDialogState === "reset-password" && (
+            <ResetPasswordForm setAuthDialogState={setAuthDialogState} />
           )}
         </DialogContent>
       </Dialog>
@@ -83,26 +87,30 @@ const LoginRegisterDialog = ({
       <DrawerContent className="!rounded-t-3xl" aria-describedby={undefined}>
         <DrawerHeader>
           <div className="flex items-center justify-center size-10 mx-auto text-white bg-gradient-to-r from-primary to-purply-blue rounded-2xl">
-            {isRegisterFormActive ? (
+            {authDialogState === "register" && (
               <UserRoundPlusIcon className="ml-0.5" />
-            ) : (
-              <UserRoundIcon />
             )}
+            {authDialogState === "login" && <UserRoundIcon />}
           </div>
           <DrawerTitle className="text-center text-2xl text-copy">
-            {isRegisterFormActive ? "Let's Get Started" : "Welcome Back"}
+            {authDialogState === "register" && "Let's Get Started"}
+            {authDialogState === "login" && "Welcome Back"}
           </DrawerTitle>
           <DrawerDescription className="text-center text-base text-copy-light">
-            {isRegisterFormActive
-              ? "Join us, register and discover Picotie"
-              : "Login to your Picotie account"}
+            {authDialogState === "register" &&
+              "Join us, register and discover Picotie"}
+            {authDialogState === "login" && "Login to your Picotie account"}
           </DrawerDescription>
         </DrawerHeader>
         <div className="px-4 mb-4">
-          {isRegisterFormActive ? (
-            <RegisterForm setRegisterFormActive={setRegisterFormActive} />
-          ) : (
-            <LogInForm setRegisterFormActive={setRegisterFormActive} />
+          {authDialogState === "register" && (
+            <RegisterForm setAuthDialogState={setAuthDialogState} />
+          )}
+          {authDialogState === "login" && (
+            <LogInForm setAuthDialogState={setAuthDialogState} />
+          )}
+          {authDialogState === "reset-password" && (
+            <ResetPasswordForm setAuthDialogState={setAuthDialogState} />
           )}
         </div>
       </DrawerContent>
