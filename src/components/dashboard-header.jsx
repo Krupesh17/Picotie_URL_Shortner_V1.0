@@ -28,7 +28,7 @@ const DashboardHeader = ({ setAccountSettingsDialogOpen }) => {
           <div className="flex items-center gap-2.5">
             <Button
               type="button"
-              className="sm:size-[60px] size-10 shrink-0 sm:rounded-3xl rounded-xl"
+              className="sm:size-[60px] size-10 shrink-0 sm:rounded-3xl rounded-xl bg-purply-blue hover:bg-purply-blue/80 text-[#f2f2f2]"
               onClick={() => {
                 if (theme === "dark") {
                   setTheme("light");

@@ -97,7 +97,7 @@ const CreateShortUrlForm = ({ longLink, closeDialog }) => {
                   type="text"
                   placeholder="Short link's title"
                   autoComplete="off"
-                  className="h-10 text-base shadow-none rounded-xl"
+                  className="h-10 text-base shadow-none rounded-xl !bg-transparent"
                   {...field}
                 />
               </FormControl>
@@ -119,7 +119,7 @@ const CreateShortUrlForm = ({ longLink, closeDialog }) => {
                   type="text"
                   placeholder="Enter your loooong URL"
                   autoComplete="off"
-                  className="h-10 text-base shadow-none rounded-xl"
+                  className="h-10 text-base shadow-none rounded-xl !bg-transparent"
                   {...field}
                 />
               </FormControl>
@@ -146,7 +146,7 @@ const CreateShortUrlForm = ({ longLink, closeDialog }) => {
                     type="text"
                     placeholder="Enter your custom link"
                     autoComplete="off"
-                    className="h-10 text-base shadow-none rounded-xl border-none focus-visible:ring-0 px-0"
+                    className="h-10 text-base shadow-none rounded-xl border-none focus-visible:ring-0 px-0 !bg-transparent"
                     {...field}
                   />
                 </div>

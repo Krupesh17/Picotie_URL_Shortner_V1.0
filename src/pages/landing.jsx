@@ -24,7 +24,7 @@ const Landing = () => {
       <div
         className="relative min-h-dvh w-full bg-background"
         style={{
-          background: `${
+          backgroundImage: `${
             theme === "dark"
               ? "url('/assets/images/bg-pattern-black.svg')"
               : "url('/assets/images/bg-pattern-white.svg')"

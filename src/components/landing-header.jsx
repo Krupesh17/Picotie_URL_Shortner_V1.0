@@ -1,12 +1,15 @@
 import React from "react";
 import { Button } from "./ui/button";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, MoonIcon, SunIcon } from "lucide-react";
 import { useDispatch, useSelector } from "react-redux";
 import { ProfileDropdown } from ".";
 import { setAuthFormsDialogActive } from "@/redux/slices/ui_slice";
+import { useTheme } from "./theme-provider";
 
 const LandingHeader = ({ setRegisterFormActive }) => {
   const { user } = useSelector((state) => state.auth);
+  const { theme, setTheme } = useTheme();
+
   const dispatch = useDispatch();
 
   return (
@@ -70,6 +73,21 @@ const LandingHeader = ({ setRegisterFormActive }) => {
               }}
             >
               <span>Get Started</span> <ArrowRight />
+            </Button>
+
+            <Button
+              type="button"
+              className="sm:size-[60px] size-10 shrink-0 sm:rounded-3xl rounded-xl bg-purply-blue hover:bg-purply-blue/80 text-[#f2f2f2]"
+              onClick={() => {
+                if (theme === "dark") {
+                  setTheme("light");
+                } else if (theme === "light") {
+                  setTheme("dark");
+                }
+              }}
+            >
+              {theme === "dark" && <SunIcon className="size-6" />}
+              {theme === "light" && <MoonIcon className="size-6" />}
             </Button>
           </div>
         )}
