@@ -34,7 +34,7 @@ const LandingFooter = () => {
               alt="Picotie Logo"
               className="sm:w-[60px] sm:h-[60px] w-10 h-10 rounded-2xl sm:rounded-3xl"
             />
-            <h2 className="text-copy-negative text-xl sm:text-3xl font-medium">
+            <h2 className="text-[#f2f2f2] text-xl sm:text-3xl font-medium">
               Picotie
             </h2>
           </div>
@@ -59,7 +59,7 @@ const LandingFooter = () => {
 
         <div className="grid grid-cols-1 sm:grid-cols-[repeat(auto-fit,_minmax(180px,_1fr))] gap-5">
           <div className="flex flex-col gap-2.5 sm:gap-5">
-            <h4 className="text-copy-negative text-xl sm:text-2xl font-medium">
+            <h4 className="text-[#f2f2f2] text-xl sm:text-2xl font-medium">
               Project
             </h4>
             <ul className="flex flex-col gap-1.5 sm:gap-2.5">
@@ -74,7 +74,7 @@ const LandingFooter = () => {
           </div>
 
           <div className="flex flex-col gap-2.5 sm:gap-5">
-            <h4 className="text-copy-negative text-xl sm:text-2xl font-medium">
+            <h4 className="text-[#f2f2f2] text-xl sm:text-2xl font-medium">
               Developer
             </h4>
             <ul className="flex flex-col gap-1.5 sm:gap-2.5">
@@ -89,6 +89,13 @@ const LandingFooter = () => {
                 <Button
                   type="button"
                   className="h-10 rounded-2xl bg-[#000000] hover:bg-[#101010]"
+                  onClick={() =>
+                    window.open(
+                      "https://github.com/Krupesh17/Picotie_URL_Shortner_V1.0",
+                      "_blank",
+                      "noopener,noreferrer"
+                    )
+                  }
                 >
                   <img
                     src={"/assets/icons/github_icon.svg"}
@@ -115,7 +122,7 @@ const LandingFooter = () => {
 
         <div className="flex items-center gap-5 font-light text-copy-negative">
           <div className="flex items-center gap-2">
-            <CircleSmallIcon className="text-green-500 fill-green-500 size-4 animate-pulse"  />
+            <CircleSmallIcon className="text-green-500 fill-green-500 size-4 animate-pulse" />
             <span>Live Demo</span>
           </div>
           <p>v1.0.0</p>
