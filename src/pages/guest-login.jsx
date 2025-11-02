@@ -1,41 +1,50 @@
 import React, { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import { useLogIn } from "@/tanstack-query/queries";
 import { useNavigate, useSearchParams } from "react-router-dom";
 
-const VerifyEmailChange = () => {
+const GuestLogin = () => {
   const navigate = useNavigate();
+
+  const [searchParams] = useSearchParams();
+  const email = searchParams.get("email");
+  const password = searchParams.get("password");
 
   const [isError, setError] = useState(false);
 
-  const [searchParams] = useSearchParams();
-  const updateEmailToken = searchParams.get("change_email_token");
+  const { mutateAsync: logIn, isPending: isLogInPending } = useLogIn();
 
-  const changeEmailToken = localStorage.getItem("changeEmailToken");
+  const handleGuestLogIn = async (email, password) => {
+    try {
+      const user = await logIn({
+        email: email,
+        password: password,
+      });
 
-  const { user, isLoading } = useSelector((state) => state.auth);
-
-  useEffect(() => {
-    if (!isLoading && !user) {
-      navigate("/", { replace: true });
-    } else {
-      if (
-        !updateEmailToken ||
-        !changeEmailToken ||
-        updateEmailToken !== changeEmailToken
-      ) {
-        localStorage.removeItem("changeEmailToken");
-        setError(true);
+      if (user) {
+        navigate("/dashboard", { replace: true });
       }
+    } catch (error) {
+      console.error(error?.message);
+      setError(true);
     }
-  }, [isLoading, user, updateEmailToken, changeEmailToken]);
+  };
 
   useEffect(() => {
-    document.title = "Email Change Verification - Picotie";
+    if (email && password) {
+      handleGuestLogIn(email, password);
+    } else {
+      setError(true);
+      navigate("/sign-in", { replace: true });
+    }
+  }, [email, password, navigate]);
+
+  useEffect(() => {
+    document.title = "Guest Login - Picotie";
   }, []);
 
   return (
     <section className="relative min-h-dvh w-full bg-background flex items-center px-2.5">
-      {isLoading ? (
+      {isLogInPending ? (
         <div className="max-w-[550px] mx-auto flex flex-col items-center">
           <img
             src="https://raw.githubusercontent.com/Tarikul-Islam-Anik/Animated-Fluent-Emojis/master/Emojis/Travel%20and%20places/Rocket.png"
@@ -45,18 +54,16 @@ const VerifyEmailChange = () => {
 
           <div className="space-y-3 mb-5">
             <h2 className="sm:text-4xl text-2xl font-semibold text-center bg-gradient-to-r from-primary to-purply-blue bg-clip-text text-transparent">
-              Securing Your New Email
-              {isLoading && (
-                <>
-                  <span className="dot text-purply-blue">.</span>
-                  <span className="dot text-purply-blue">.</span>
-                  <span className="dot text-purply-blue">.</span>
-                </>
-              )}
+              Logging You In
+              <>
+                <span className="dot text-purply-blue">.</span>
+                <span className="dot text-purply-blue">.</span>
+                <span className="dot text-purply-blue">.</span>
+              </>
             </h2>
             <p className="sm:text-lg text-base text-copy-light text-center">
-              We're verifying your updated email to keep your account safe and
-              connected.
+              Guest login is in progress. Please wait while authentication
+              completes.
             </p>
           </div>
         </div>
@@ -69,11 +76,11 @@ const VerifyEmailChange = () => {
           />
           <div className="space-y-3 mb-5">
             <h2 className="sm:text-4xl text-2xl font-semibold text-center bg-gradient-to-r from-primary to-purply-blue bg-clip-text text-transparent">
-              Email Verification Unsuccessful
+              Guest Log In Error
             </h2>
             <p className="sm:text-lg text-base text-copy-light text-center">
-              We couldn't verify your email. Please check the link or try again
-              later. You may close this window.
+              Guest login attempt failed. Please check credentials and try
+              again.
             </p>
           </div>
         </div>
@@ -86,11 +93,10 @@ const VerifyEmailChange = () => {
           />
           <div className="space-y-3 mb-5">
             <h2 className="sm:text-4xl text-2xl font-semibold text-center bg-gradient-to-r from-primary to-purply-blue bg-clip-text text-transparent">
-              Email Change Successful
+              Guest Log In Successful
             </h2>
             <p className="sm:text-lg text-base text-copy-light text-center">
-              Your new email address has been confirmed. You may now close this
-              browser window.
+              You've logged in successfully. Enjoy your session!
             </p>
           </div>
         </div>
@@ -99,4 +105,4 @@ const VerifyEmailChange = () => {
   );
 };
 
-export default VerifyEmailChange;
+export default GuestLogin;

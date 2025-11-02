@@ -32,6 +32,10 @@ const ChangePassword = () => {
     }
   }, [resetToken, changePasswordToken]);
 
+  useEffect(() => {
+    document.title = "Change Password - Picotie";
+  }, []);
+
   return (
     <div className="min-h-dvh bg-background flex items-center px-2.5">
       <section

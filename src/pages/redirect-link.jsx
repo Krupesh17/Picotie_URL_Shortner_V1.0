@@ -43,6 +43,10 @@ const RedirectLink = () => {
     }
   }, [url_slug, handleRedirect]);
 
+  useEffect(() => {
+    document.title = "Redirect Link - Picotie";
+  }, []);
+
   return (
     <div className="relative min-h-dvh w-full bg-background flex items-center px-2.5">
       <div className="max-w-[550px] mx-auto flex flex-col items-center">

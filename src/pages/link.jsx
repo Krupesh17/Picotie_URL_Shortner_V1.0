@@ -28,6 +28,10 @@ const Link = () => {
     getLinkData();
   }, [id]);
 
+  useEffect(() => {
+    document.title = `${linkData ? linkData?.title : "Link"} - Picotie`;
+  }, []);
+
   return isLoading ? (
     <div className="w-full">
       <section className="container px-2.5 sm:px-5 mx-auto mt-[100px] max-sm:mt-20">

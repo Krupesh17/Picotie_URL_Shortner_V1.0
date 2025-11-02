@@ -2,6 +2,8 @@ import { createBrowserRouter } from "react-router-dom";
 import { RouterProvider } from "react-router";
 import {
   ChangePassword,
+  Error404,
+  GuestLogin,
   Landing,
   Link,
   RedirectLink,
@@ -25,10 +27,11 @@ const router = createBrowserRouter([
   {
     path: "/",
     element: <PublicRoute />,
-    children: [{ index: true, element: <Landing /> }],
+    children: [
+      { index: true, element: <Landing /> },
+      { path: "/guest-log-in", element: <GuestLogin /> },
+    ],
   },
-
-  // { path: "/", element: <Landing /> },
   { path: "/:url_slug", element: <RedirectLink /> },
   {
     path: "/verify-email-change",
@@ -56,6 +59,14 @@ const router = createBrowserRouter([
         ],
       },
     ],
+  },
+  {
+    path: "*",
+    element: <Error404 />,
+  },
+  {
+    path: "/404",
+    element: <Error404 />,
   },
 ]);
 

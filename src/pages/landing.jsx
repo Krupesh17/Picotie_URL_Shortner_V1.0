@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   LandingHeroSection,
   LandingHeader,
@@ -13,6 +13,10 @@ import { useTheme } from "@/components/theme-provider";
 const Landing = () => {
   const [authDialogState, setAuthDialogState] = useState("login");
   const { theme } = useTheme();
+
+  useEffect(() => {
+    document.title = "Picotie";
+  }, []);
 
   return (
     <>
