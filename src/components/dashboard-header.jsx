@@ -11,8 +11,8 @@ const DashboardHeader = ({ setAccountSettingsDialogOpen }) => {
   const { theme, setTheme } = useTheme();
 
   return (
-    <header className="sticky top-5 left-0 right-0 sm:h-[100px] h-20 px-2.5 z-30">
-      <nav className="h-full container mx-auto px-5 flex items-center justify-between rounded-3xl max-sm:rounded-2xl bg-ebony-clay-black">
+    <header className="sticky top-5 left-0 right-0 sm:h-[100px] h-20 max-sm:h-[60px] px-2.5 z-30">
+      <nav className="h-full container mx-auto px-5 max-sm:px-2.5 flex items-center justify-between rounded-3xl max-sm:rounded-2xl bg-ebony-clay-black">
         <Link to="/" className="flex items-center gap-2.5">
           <img
             src="/assets/icons/picotie_logo.svg"
