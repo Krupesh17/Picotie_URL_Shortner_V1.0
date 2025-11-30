@@ -10,7 +10,7 @@ const social_trust_stats = [
 const LandingStatsSection = () => {
   return (
     <section className="container px-2.5 sm:px-5 mx-auto mt-[100px] max-sm:mt-20">
-      <Card className="py-5 rounded-4xl gap-10 max-sm:gap-5">
+      <Card className="py-5 rounded-4xl gap-10 max-sm:gap-5 bg-background/10 backdrop-blur-[1px] dark:backdrop-blur-[1.5px] border-border/30">
         <CardHeader>
           <h1 className="text-6xl max-lg:text-5xl max-md:text-4xl text-center text-copy font-bold">
             Trusted by Thousands

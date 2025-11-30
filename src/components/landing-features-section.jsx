@@ -51,7 +51,7 @@ const LandingFeaturesSection = () => {
       {/* Have to fix this grid because in mobile view the feature cards are overflowing. */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
         {features?.map((feature, index) => (
-          <Card key={index} className="py-5 rounded-4xl gap-5 max-sm:gap-3">
+          <Card key={index} className="py-5 rounded-4xl gap-5 max-sm:gap-3 bg-background/10 backdrop-blur-[1px] dark:backdrop-blur-[1.5px] border-border/30">
             <CardHeader className="flex flex-col gap-5 max-sm:gap-3">
               <div
                 className={`size-[60px] max-sm:size-10 rounded-3xl max-sm:rounded-2xl shrink-0 flex items-center justify-center ${feature?.bg_gradient_classNames}`}

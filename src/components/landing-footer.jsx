@@ -39,13 +39,13 @@ const LandingFooter = () => {
             </h2>
           </div>
 
-          <p className="text-copy-negative-light sm:text-xl text-lg">
+          <p className="text-gray-400 sm:text-xl text-lg">
             A modern URL shortener built with React JS, ShadCN UI, and Supabase
             backend. Features Redux state management, QR code generation, and
             responsive design.
           </p>
 
-          <ul className="flex items-center gap-2.5 flex-wrap text-copy-negative">
+          <ul className="flex items-center gap-2.5 flex-wrap text-gray-400">
             {tech_used_list?.map((tech, index) => (
               <li key={index}>
                 <Badge className="h-8 sm:h-10 sm:px-4 rounded-full text-xs sm:text-sm bg-[#171F2C] border border-[#353c4a]">
@@ -65,7 +65,7 @@ const LandingFooter = () => {
             <ul className="flex flex-col gap-1.5 sm:gap-2.5">
               {project_points?.map((point, index) => (
                 <li key={index}>
-                  <p className="text-copy-negative-light text-lg sm:text-xl">
+                  <p className="text-gray-400 text-lg sm:text-xl">
                     {point}
                   </p>
                 </li>
@@ -80,7 +80,7 @@ const LandingFooter = () => {
             <ul className="flex flex-col gap-1.5 sm:gap-2.5">
               {developer_points?.map((point, index) => (
                 <li key={index}>
-                  <p className="text-copy-negative-light text-lg sm:text-xl">
+                  <p className="text-gray-400 text-lg sm:text-xl">
                     {point}
                   </p>
                 </li>
@@ -111,16 +111,16 @@ const LandingFooter = () => {
 
       <section className="container p-5 max-sm:p-2.5 mx-auto flex items-center justify-between flex-wrap gap-5">
         <div className="font-light">
-          <h6 className="text-copy-negative text-base mb-2.5">
+          <h6 className="text-[#f2f2f2] text-base mb-2.5">
             © 2024 LinkShort Pro. Built with React JS, Redux Toolkit & Supabase.
           </h6>
-          <p className="text-copy-negative-light text-sm">
+          <p className="text-gray-400 text-sm">
             Designed and developed as a portfolio project showcasing modern
             frontend development skills.
           </p>
         </div>
 
-        <div className="flex items-center gap-5 font-light text-copy-negative">
+        <div className="flex items-center gap-5 font-light text-[#f2f2f2]">
           <div className="flex items-center gap-2">
             <CircleSmallIcon className="text-green-500 fill-green-500 size-4 animate-pulse" />
             <span>Live Demo</span>

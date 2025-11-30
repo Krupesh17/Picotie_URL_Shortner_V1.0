@@ -102,6 +102,7 @@ const RegisterForm = ({ setAuthDialogState }) => {
                 <Input
                   type="text"
                   placeholder="Full Name"
+                  autoComplete="off"
                   className="h-10 text-base shadow-none rounded-xl !bg-transparent"
                   {...field}
                 />
@@ -121,7 +122,7 @@ const RegisterForm = ({ setAuthDialogState }) => {
                 <Input
                   type="email"
                   placeholder="Email"
-                  autoComplete="email"
+                  autoComplete="off"
                   className="h-10 text-base shadow-none rounded-xl !bg-transparent"
                   {...field}
                 />

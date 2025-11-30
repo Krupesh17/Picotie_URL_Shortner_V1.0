@@ -162,6 +162,7 @@ const AccountSettingsForm = ({ handleOnDialogDrawerOpen }) => {
                   <Input
                     type="text"
                     placeholder="Name"
+                    autoComplete="off"
                     className="h-10 text-base shadow-none rounded-xl"
                     {...field}
                   />
@@ -181,7 +182,7 @@ const AccountSettingsForm = ({ handleOnDialogDrawerOpen }) => {
                   <Input
                     type="email"
                     placeholder="Email"
-                    autoComplete="email"
+                    autoComplete="off"
                     className="h-10 text-base shadow-none rounded-xl"
                     {...field}
                   />

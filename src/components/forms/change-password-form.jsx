@@ -80,7 +80,7 @@ const ChangePasswordForm = ({ setChangePasswordState }) => {
           type="email"
           name="email"
           placeholder="Email"
-          autoComplete="username"
+          autoComplete="off"
           defaultValue={user?.email}
           readOnly={true}
           className="hidden"

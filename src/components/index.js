@@ -12,6 +12,7 @@ export { default as ProfileAvatar } from "./profile-avatar";
 export { default as ProfileDropdown } from "./profile-dropdown";
 export { default as DashboardHeader } from "./dashboard-header";
 export { default as DashboardStatsCards } from "./dashboard-stats-cards";
+export { default as DashboardStatsCard } from "./dashboard-stats-card";
 export { default as CreateNewShortenedUrlDialog } from "./create-new-shortened-url-dialog";
 export { default as DashboardLinksSection } from "./dashboard-links-section";
 export { default as UrlShortenerInputBox } from "./url-shortener-input-box";
@@ -27,3 +28,4 @@ export { default as LinkLocationClickAnalyticsChart } from "./link-location-clic
 export { default as AccountSettingsDialog } from "./account-settings-dialog";
 export { default as ProfilePictureEditor } from "./profile-picture-editor";
 export { default as ProfilePicturePopoverMenu } from "./profile-picture-popover-menu";
+export { default as CarouselViewBox } from "./carousel-view-box";

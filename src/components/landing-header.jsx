@@ -21,7 +21,7 @@ const LandingHeader = ({ setAuthDialogState }) => {
             alt="Picotie Logo"
             className="sm:w-[60px] sm:h-[60px] w-10 h-10 rounded-2xl sm:rounded-3xl"
           />
-          <h2 className="text-xl sm:text-3xl font-medium text-[#f2f2f2]">
+          <h2 className="text-xl sm:text-3xl font-medium text-[#f2f2f2] max-sm:hidden">
             Picotie
           </h2>
         </div>

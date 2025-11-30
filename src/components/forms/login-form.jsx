@@ -89,7 +89,7 @@ const LogInForm = ({ setAuthDialogState }) => {
                 <Input
                   type="email"
                   placeholder="Email"
-                  autoComplete="email"
+                  autoComplete="off"
                   className="h-10 text-base shadow-none rounded-xl !bg-transparent"
                   {...field}
                 />

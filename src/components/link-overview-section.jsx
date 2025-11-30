@@ -193,7 +193,7 @@ const LinkOverviewSection = ({ shortLinkData }) => {
               </div>
             </div>
             <div className="w-full">
-              <div className="flex items-center justify-between gap-2.5 lg:hidden">
+              <div className="flex items-center justify-between gap-2.5 lg:hidden mb-5">
                 <p className="text-copy font-medium flex items-center gap-1.5">
                   <QrCodeIcon className="size-5" /> QR Code
                 </p>
