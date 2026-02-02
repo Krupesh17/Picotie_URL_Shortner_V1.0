@@ -18,7 +18,7 @@ const ShortLinkCardButtonGroup = ({ shortLinkData }) => {
     debounce(() => {
       setURLCopied(false);
     }, 1000),
-    []
+    [],
   );
 
   const handleCopyURL = async (event) => {
@@ -29,7 +29,7 @@ const ShortLinkCardButtonGroup = ({ shortLinkData }) => {
           shortLinkData?.custom_url
             ? shortLinkData?.custom_url
             : shortLinkData?.short_url
-        }`
+        }`,
       );
       setURLCopied(true);
     } catch (error) {
@@ -59,6 +59,11 @@ const ShortLinkCardButtonGroup = ({ shortLinkData }) => {
     }
   };
 
+  const handleDelete = (event) => {
+    event.stopPropagation();
+    setDeleteDialogOpen(true);
+  };
+
   const actionButtons = [
     {
       label: "Copy",
@@ -80,20 +85,19 @@ const ShortLinkCardButtonGroup = ({ shortLinkData }) => {
       label: "Delete",
       icon: <Trash2Icon className="size-5" />,
       className: "max-sm:ml-auto",
-      onClick: (event) => {
-        event?.stopPropagation();
-        setDeleteDialogOpen(true);
-      },
+      onClick: (event) => handleDelete(event),
     },
   ];
 
   return (
     <>
-      <ShortLinkDeleteDialog
-        isDialogOpen={isDeleteDialogOpen}
-        setDialogOpen={setDeleteDialogOpen}
-        shortLinkData={shortLinkData}
-      />
+      <div onClick={(e) => e.stopPropagation()}>
+        <ShortLinkDeleteDialog
+          isDialogOpen={isDeleteDialogOpen}
+          setDialogOpen={setDeleteDialogOpen}
+          shortLinkData={shortLinkData}
+        />
+      </div>
 
       <ul className="flex items-center gap-2.5">
         {actionButtons?.map((item, index) => (
